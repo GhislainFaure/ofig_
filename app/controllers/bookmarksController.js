@@ -9,9 +9,8 @@ const bookmarksController = {
     })
   },
   addBookmark: async (req, res) => {
+    
     const id = req.params.id;
-    if (!req.session.bookmarks) 
-      req.session.bookmarks = [];
 
       // on regarde si une figurine avec l'id passé en params est deja presente ou non dans les favoris
     const figInBookmarks = req.session.bookmarks.find( f => {
@@ -32,6 +31,11 @@ const bookmarksController = {
     req.session.bookmarks = req.session.bookmarks.filter( b => b.id !== Number(id));
     res.redirect('/bookmarks');
   },
+  checkBookmarksSet: (req, res, next) => {
+    if (!req.session.bookmarks) 
+      req.session.bookmarks = [];
+      next();
+  }
 };
 
 module.exports = bookmarksController;

@@ -12,6 +12,10 @@ router.get("/", mainController.homePage);
 // page article
 router.get("/articles/:id", mainController.articlePage);
 
+
+// middleware pour checker que le tableau des bookmarks existe bien
+router.use("/bookmarks", bookmarksController.checkBookmarksSet);
+
 // page favoris
 router.get("/bookmarks", bookmarksController.bookmarksPage);
 
